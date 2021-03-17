@@ -1,0 +1,52 @@
+ <br>
+
+   <div class="row">
+       <div class="col-md-5">
+   
+           <hr>
+            <div class="card card-body">
+               <a class="btn btn-primary  btn-sm btn-block" href="">Create patient</a>
+               
+            </div>
+       </div>
+   
+       <div class="col-md-7">
+    
+           <div class="card card-body">
+               <a class="btn btn-primary  btn-sm btn-block" href="">patient waiting room</a>
+              
+               
+               <table class="table table-sm">
+                   <tr>
+                       <th>Name</th>
+                       <th>Date Orderd</th>
+                       <th>Doctor Name</th>
+                       <th>Update</th>
+                       <th>Remove</th>
+                   </tr>
+                      {% for  patient in patients %}        
+                   <tr>
+                        <td>
+                        {{patient.patient}}
+                        </td>
+                        
+                       <td>
+                      {{patient.registration_date}}
+                        </td>
+                    
+                        <td>
+                            <a class="btn btn-sm btn-info" href="">Update</a>
+                        </td>
+                        <td>
+                           <a class="btn btn-sm btn-danger"href="">Delete</a>
+                        </td>
+                        <td>
+                           <a class="btn btn-sm btn-danger"href="">Delete</a>
+                        </td>
+                   </tr>
+                  {% endfor %}
+               </table>
+           </div>
+       </div>
+   
+   </div>
