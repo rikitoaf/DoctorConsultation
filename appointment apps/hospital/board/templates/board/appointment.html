@@ -5,7 +5,7 @@
    
            <hr>
             <div class="card card-body">
-               <a class="btn btn-primary  btn-sm btn-block" href="">Create patient</a>
+               <a class="btn btn-primary  btn-sm btn-block" href="{% url 'create_patient'%}">Create patient</a>
                
             </div>
        </div>
@@ -19,10 +19,9 @@
                <table class="table table-sm">
                    <tr>
                        <th>Name</th>
-                       <th>Date Orderd</th>
+                       <th>Date Enrolled</th>
                        <th>Doctor Name</th>
-                       <th>Update</th>
-                       <th>Remove</th>
+                     
                    </tr>
                       {% for  patient in patients %}        
                    <tr>
@@ -35,13 +34,13 @@
                         </td>
                     
                         <td>
-                            <a class="btn btn-sm btn-info" href="">Update</a>
+                            <a class="btn btn-sm btn-info" href="">{{patient.doctor.doctor_name}}</a>
                         </td>
                         <td>
-                           <a class="btn btn-sm btn-danger"href="">Delete</a>
+                           <a class="btn btn-sm btn-danger"href="{%url 'update_patient' patient.pk %}">Update</a>
                         </td>
                         <td>
-                           <a class="btn btn-sm btn-danger"href="">Delete</a>
+                           <a class="btn btn-sm btn-danger"href="{% url 'delete_patient' patient.id  %}">Delete</a>
                         </td>
                    </tr>
                   {% endfor %}

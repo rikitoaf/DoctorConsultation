@@ -55,3 +55,7 @@ def loginPage(request):
 def logoutUser(request):
 	logout(request)
 	return redirect('login')
+
+def about(request):
+	
+	return render(request, 'accounts/about.html')

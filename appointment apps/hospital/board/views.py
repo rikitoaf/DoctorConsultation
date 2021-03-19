@@ -1,19 +1,50 @@
 from django.shortcuts import render,redirect
 from . models import Doctor,Patient
-from django.views.generic import ListView,DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
+from .forms import PatientForm
 
 # Create your views here.
 
 def IndexView(request):
     patient = Patient.objects.all()
     patients = Patient.objects.filter(waiting_status = True)
-    context = {patients: 'patients'} 
+    context = {'patients': patients} 
 
     return render (request,"board/appointment.html",context)
 
-# class PatientCreateView (CreateView):
-#     model = Patient
-#     fields = ["doctor","patient"]
-#     success_url = reverse_lazy("board:appointment")
+def PatientCreateView (request):
+    forms = PatientForm()
+    if request.method == 'POST':
+    #print('Printing Post :', request.POST)
+        forms = PatientForm(request.POST)
+        if forms.is_valid():
+            forms.save()
+            return redirect('/')
+    context = {'form': forms}
+    return render (request, 'board/create_patient.html',{'context' : context})
+
+def PatientUpdateView (request,pk):
+    patient = Patient.objects.get(id = pk)
+    form = PatientForm(instance = patient)
+    if request.method == 'POST':
+        #print('Printing Post :', request.POST)
+        form = PatientForm(request.POST,instance = patient)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    context = {'form': form}
+    return render (request, 'board/update_patient.html',{'context' : context})
+
+def PatientDeleteView (request,pk):
+    patient = Patient.objects.get(id = pk)
+    if request.method == "POST":
+        patient.delete()
+        return redirect('/')
+
+    context = {'patient':patient}
+    return render(request, 'board/delete_patient.html', context)
+
+
+
+        
+    
+    

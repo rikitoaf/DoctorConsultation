@@ -5,14 +5,14 @@ from django.db import models
 
 class Doctor (models.Model):
     doctor_name = models.CharField( max_length=50, null = True )
-    registration_date = models.DateField("date registered")
+    registration_date = models.DateField(auto_now_add = True)
     def __str__(self):
         return self.doctor_name
 
 class Patient (models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     patient = models.CharField( max_length=50, null = True)
-    registration_date = models.DateField("date registered")
+    registration_date = models.DateField(auto_now_add = True)
     waiting_status = models.BooleanField(default = True)
 
     @property
