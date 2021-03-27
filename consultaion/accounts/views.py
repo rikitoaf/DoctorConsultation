@@ -2,7 +2,7 @@ from math import ceil
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from .forms import  CreateUserForm
+from .forms import  CreateUserForm,UserEditForm,ProfileEditForm
 
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
@@ -59,3 +59,30 @@ def logoutUser(request):
 def about(request):
 	
 	return render(request, 'accounts/about.html')
+
+
+def profile(request,pk):
+	
+	u=User.objects.filter(username=pk).first()
+	context={'u':u}
+
+	return render(request, 'accounts/profile.html',context)
+
+
+def profile_edit(request):
+    if request.method == 'POST':
+        u_form = UserEditForm(data=request.POST or None, instance=request.user)
+        p_form = ProfileEditForm(data=request.POST or None, instance=request.user.profile, files=request.FILES)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            return redirect('home')
+
+    else:
+        u_form = UserEditForm(instance=request.user)
+        p_form = ProfileEditForm(instance=request.user.profile)
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+    return render(request, 'accounts/profile_edit.html', context)

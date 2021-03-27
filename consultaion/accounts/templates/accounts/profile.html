@@ -1,0 +1,87 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block profile %}active{% endblock %}
+{% block content %}
+
+
+
+{% load crispy_forms_tags %}
+
+<div class="container">
+<div class="row">
+					<div class="col-md-4 ftco-animate d-flex fadeInUp ftco-animated">
+						<div class="staff bg-primary">
+							<div class="img-wrap d-flex align-items-stretch">
+								<img class="img align-self-stretch" src="{{ u.profile.user_img.url }}">
+							</div>
+							<div class="text pt-3 px-3 pb-4 text-center">
+								<h3>Name </h3>
+								<h5>Designation</h5>
+								<h2 class="logo">Information </h2 >
+								<span class="position mb-2">class</span>
+								<div class="faded">
+									<p>Quotes</p>
+									<ul class="ftco-social text-center">
+
+		              </ul>
+	              </div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 ftco-animate d-flex fadeInUp ftco-animated">
+<div class="text mt-3">
+                <h3 class="heading"><a href="#">What Every Athlete Needs To Know About Injury Recovery</a></h3>
+                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                <p><a href="#" class="btn btn-primary">Go To His blog page.....</a></p>
+              </div>
+					</div>
+	<div class="col-md-4 ftco-animate d-flex fadeInUp ftco-animated">
+		<div class="container">
+
+		
+<p><a href="" class="btn btn-primary">Edit Profile</a></p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Days</th>
+      <th scope="col">First</th>
+  
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Sat</td>
+   
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Sun</td>
+     
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Mun</td>
+     
+    </tr>
+  </tbody>
+</table>
+			<div> <br> <a href=""> <img src="https://img.icons8.com/doodle/48/000000/chat.png"/></a></div>
+
+			
+		</div>
+	</div>
+
+
+
+				</div>
+
+</div>
+
+
+
+
+
+{% endblock content %}
+
