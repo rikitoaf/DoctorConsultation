@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 
 
 
@@ -10,25 +13,24 @@ class Profile(models.Model):
     user_age = models.IntegerField(null=True)
     user_phone = models.CharField(max_length=200, null=True)
     user_address = models.CharField(max_length=200, null=True)
-    user_email = models.CharField(max_length=200, null=True)
     user_img = models.ImageField(upload_to='profile_pics', default='default.jpg')
-    is_doctor = models.BooleanField(default = False)
+  
 
     def __str__(self):
         return self.user.username
 
+
+@receiver(post_save, sender=User)
+def _post_save_receiver(sender,created,instance, **kwargs):
+    if created:
+        Profile.objects.create(user = instance)
+    instance.profile.save()
+    
+
+
 # class Department(models.Model):
-# 	name = models.CharField(max_length=200, null=True)
+#     dept_name = models.CharField(max_length=200, null=True)
 
-# 	def __str__(self):
-# 		return self.name
+#     def __str__(self):
+#         return self.dept_name
 
-# class Doctor(models.Model):
-# 	name = models.CharField(max_length=200, null=True)
-# 	phone = models.CharField(max_length=200, null=True)
-#     address = models.CharField(max_length=200, null=True)
-#     email = models.CharField(max_length=200, null=True)
-#     department = models.ForeignKey(Department, null=True, on_delete= models.SET_NULL)
-
-# 	def __str__(self):
-# 		return self.name

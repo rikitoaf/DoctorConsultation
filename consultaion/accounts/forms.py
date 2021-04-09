@@ -22,3 +22,8 @@ class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
         exclude = {'user','is_doctor'}
+
+# class DoctorEditForm(forms.ModelForm):
+#     class Meta:
+#         model = Doctor
+#         exclude = {'doc_name'}

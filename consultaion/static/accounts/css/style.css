@@ -9770,3 +9770,18 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+
+
+    #total-Appointment{
+      background-color: #4cb4c7;
+  }
+
+
+  #todays-visited{
+      background-color: #7abecc;
+  }
+
+  #appointment-pending{
+      background-color: #7CD1C0;
+  }
+

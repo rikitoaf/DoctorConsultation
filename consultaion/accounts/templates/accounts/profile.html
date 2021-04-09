@@ -15,10 +15,10 @@
 								<img class="img align-self-stretch" src="{{ u.profile.user_img.url }}">
 							</div>
 							<div class="text pt-3 px-3 pb-4 text-center">
-								<h3>Name </h3>
-								<h5>Designation</h5>
-								<h2 class="logo">Information </h2 >
-								<span class="position mb-2">class</span>
+								<h3>{{ u.username }} </h3>
+								<h5>{{u.doctor.department}}</h5>
+								<h2 > </h2 >
+								<span class="position mb-2">{{u.doctor.institution}}</span>
 								<div class="faded">
 									<p>Quotes</p>
 									<ul class="ftco-social text-center">
@@ -38,33 +38,75 @@
 	<div class="col-md-4 ftco-animate d-flex fadeInUp ftco-animated">
 		<div class="container">
 
-		
-<p><a href="" class="btn btn-primary">Edit Profile</a></p>
+	{% if request.user.username == u.username %}	
+<p><a href="{%url 'profile_edit' %}" class="btn btn-primary">Edit Profile</a></p>
+{% else %}
+<p><a href="{%url 'appointment' u.username %}" class="btn btn-primary">Take Appointment</a></p>
+{% endif %}
 
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">Days</th>
-      <th scope="col">First</th>
+      <th scope="col">Time</th>
+      <th scope="col">Weekly Days</th>
   
     </tr>
   </thead>
   <tbody>
+  {% if u.doctor.week_sat%}
     <tr>
-      <th scope="row">1</th>
-      <td>Sat</td>
+	
+      <th scope="row">{{u.doctor.start_time}} - {{u.doctor.end_time}}  </th>
+      <td>Satday</td>
    
     </tr>
+	{%endif%}
+	{% if u.doctor.week_sun%}
     <tr>
-      <th scope="row">2</th>
-      <td>Sun</td>
+     <th scope="row">{{u.doctor.start_time}} - {{u.doctor.end_time}}  </th>
+      <td>Sunday</td>
      
     </tr>
+	{%endif%}
+   {% if u.doctor.week_mon%}
     <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Mun</td>
+     <th scope="row">{{u.doctor.start_time}} - {{u.doctor.end_time}}  </th>
+      <td>Monday</td>
      
     </tr>
+	{%endif%}
+
+	{% if u.doctor.week_tues%}
+    <tr>
+     <th scope="row">{{u.doctor.start_time}} - {{u.doctor.end_time}}  </th>
+      <td>Tuesday</td>
+     
+    </tr>
+	{%endif%}
+
+	{% if u.doctor.week_wed%}
+    <tr>
+     <th scope="row">{{u.doctor.start_time}} - {{u.doctor.end_time}}  </th>
+      <td>Wednesday</td>
+     
+    </tr>
+	{%endif%}
+
+	{% if u.doctor.week_thurs%}
+    <tr>
+     <th scope="row">{{u.doctor.start_time}} - {{u.doctor.end_time}}  </th>
+      <td>Thursday</td>
+     
+    </tr>
+	{%endif%}
+
+	{% if u.doctor.week_fri%}
+    <tr>
+     <th scope="row">{{u.doctor.start_time}} - {{u.doctor.end_time}}  </th>
+      <td>Friday</td>
+     
+    </tr>
+	{%endif%}
   </tbody>
 </table>
 			<div> <br> <a href=""> <img src="https://img.icons8.com/doodle/48/000000/chat.png"/></a></div>

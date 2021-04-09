@@ -86,3 +86,27 @@ def profile_edit(request):
         'p_form': p_form
     }
     return render(request, 'accounts/profile_edit.html', context)
+
+# def doctor_edit (request):
+# 	# doctor_ins = Doctor.objects.get(doc_name=request.user)
+# 	if request.method == 'POST':
+
+# 		doc_form = DoctorEditForm(data=request.POST or None)
+# 		if doc_form.is_valid():
+# 			form = doc_form.save(commit = False)
+# 			form.doc_name = request.user
+# 			form.save()
+			
+			
+# 			return redirect("/")
+# 	else:
+# 		doc_form = DoctorEditForm (instance = request.user)
+	
+# 	context = {
+# 		'doc_form' : doc_form
+# 	}
+# 	return render(request, 'accounts/doctor_edit.html', context)
+
+	
+
+

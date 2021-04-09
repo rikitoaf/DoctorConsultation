@@ -37,7 +37,7 @@
 	    <div class="container">
 				<div class="row justify-content-between">
 					<div class="col-md-3 mb-md-0 mb-4 d-flex align-items-center">
-						<a class="navbar-brand" href="index.html">Chiropractic</a>
+						<a class="navbar-brand" href="{%url 'home'%}">Chiropractic</a>
 					</div>
 					<div class="col-md-9">
 						<div class="row">
@@ -45,19 +45,19 @@
 								<div class="top-wrap d-flex">
 									<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-user-circle-o"></span></div>
                   {% if request.user.is_authenticated %}
-                  <div class="text"><a href="">Hi, {{user.username}}</a></div>
+                  <div class="text"><a href="">Hi, {{user.username}} </a><a href="{%url 'logout'%}">  :LogOUT?</a></div>
                   {% else %}
-									<div class="text"><a href="">Log In?</a></div>
+									<div class="text"><a href="{% url 'login' %}">Log In?</a></div>
                   {% endif %}
 								</div>
 							</div>
               <div class="col-md-4 mb-md-0 mb-3">
 								<div class="top-wrap d-flex">
 									<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-user"></span></div>
-                  {% if user.profile.is_doctor == True %}
-									<div class="text"><a href="">Check your Dashboard</a></div>
+                  {% if user.doctor %}
+									<div class="text"><a href="{% url 'dashboard'%}">Check your Dashboard</a></div>
                   {% else %}
-                  <div class="text"><a href="">Are you a Doctor?</a></div>
+                  <div class="text"><a href="{% url 'createdocprofile' %}">Are you a Doctor?</a></div>
                   {% endif %}
 								</div>
               </div>
@@ -86,14 +86,18 @@
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav mr-auto">
 	        	<li class="nav-item"><a href="\" class="nav-link">Home</a></li>
-            <li class="nav-item profile "><a href="\contact" class="nav-link">Profile</a></li>
+             {% if request.user.is_authenticated and request.user.profile %}
+            <li class="nav-item {% block profile %}{% endblock %}"><a href=" {% url 'profile' user.username %}" class="nav-link">Profile</a></li>
+            {% comment %} {% elif request.user.is_authenticated and !request.user.profile %}
+            <li class="nav-item ><a href=" {% url 'setprofile' user.username %}" class="nav-link">SET:Profile</a></li> {% endcomment %}
+            {% endif %}
 	        	<li class="nav-item {% block about %}{% endblock %} "><a href="\about" class="nav-link">About</a></li>
-	        
-	        	<li class="nav-item services "><a href="\services" class="nav-link">Services</a></li>
+            
+            <li class="nav-item {% block doctorview %}{% endblock %}" "><a href="{% url 'doctorview' %}" class="nav-link">Services</a></li>
 	        	<li class="nav-item department "><a href="\department" class="nav-link">Departments</a></li>
 	        	
 	           <li class="nav-item contact "><a href="\contact" class="nav-link">Contact</a></li>
-             
+
 	        </ul>
 	      </div>
 	    </div>
@@ -146,22 +150,7 @@
 	            </div>
             </div>
           </div>
-          <div class="col-md-6 col-lg">
-             <div class="ftco-footer-widget bg-primary p-4 py-5">
-              <h2 class="ftco-heading-2">Business Hours</h2>
-              <div class="opening-hours">
-              	<h4>Opening Days:</h4>
-              	<p class="pl-3">
-              		<span>Monday – Friday : 9am to 20 pm</span>
-              		<span>Saturday : 9am to 17 pm</span>
-              	</p>
-              	<h4>Vacations:</h4>
-              	<p class="pl-3">
-              		<span>All Sunday Days</span>
-              		<span>All Official Holidays</span>
-              	</p>
-              </div>
-            </div>
+          
           </div>
         </div>
 
