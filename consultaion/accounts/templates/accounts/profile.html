@@ -15,27 +15,68 @@
 								<img class="img align-self-stretch" src="{{ u.profile.user_img.url }}">
 							</div>
 							<div class="text pt-3 px-3 pb-4 text-center">
-								<h3>{{ u.username }} </h3>
-								<h5>{{u.doctor.department}}</h5>
+								<h4>{{ u.username }} </h4>
+                {% if request.user.doctor %}
+								<h4>{{u.doctor.department}}</h4>
 								<h2 > </h2 >
 								<span class="position mb-2">{{u.doctor.institution}}</span>
 								<div class="faded">
 									<p>Quotes</p>
 									<ul class="ftco-social text-center">
-
+                  
 		              </ul>
+                  {% else %}
+                  	<h3>Sex : {{u.profile.user_gender}}</h3>
+								{% comment %} <h3 > Address : {{u.profile.user_address}}</h3 > {% endcomment %}
+								<span class="position mb-2">Age :{{u.profile.user_age}}</span>
+								<div class="faded">
+									<h3> Phone : {{u.profile.user_phone}}</h3>
+									<ul class="ftco-social text-center">
+                  
+		              </ul>
+                {%endif%}
+
+
 	              </div>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-4 ftco-animate d-flex fadeInUp ftco-animated">
-<div class="text mt-3">
-                <h3 class="heading"><a href="#">What Every Athlete Needs To Know About Injury Recovery</a></h3>
+					<div class="col-md-6 ftco-animate d-flex fadeInUp ftco-animated">
+          {% if request.user.doctor %}
+            <div class="text mt-3">
+                <h3 class="heading"><a href="#">Some Brief Advice/Suggestion </a></h3>
                 <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                <p><a href="#" class="btn btn-primary">Go To His blog page.....</a></p>
-              </div>
-					</div>
-	<div class="col-md-4 ftco-animate d-flex fadeInUp ftco-animated">
+                <p><a href="#" class="btn btn-primary">check dashboard</a></p>
+            </div>
+          
+      {% endif %}
+
+ 
+        <table class="table">
+  <thead>
+    <tr>
+      
+      <th scope="col">Doctor</th>
+      <th scope="col">Appointment Date</th>
+      <th scope="col">Starting Time</th>
+    </tr>
+  </thead>
+  <tbody>
+  {%for i in appointment%}
+    <tr>
+      <th scope="row">{{i.doctor.user}}</th>
+      <td>{{i.date}}</td>
+      <td>{{i.doctor.start_time}}</td>
+      
+    </tr>
+    {%endfor%}
+  </tbody>
+</table>
+
+
+         </div>
+					
+	<div class="col-md-2 ftco-animate d-flex fadeInUp ftco-animated">
 		<div class="container">
 
 	{% if request.user.username == u.username %}	
@@ -44,6 +85,7 @@
 <p><a href="{%url 'appointment' u.username %}" class="btn btn-primary">Take Appointment</a></p>
 {% endif %}
 
+{% if request.user.doctor %}
 <table class="table">
   <thead>
     <tr>
@@ -109,6 +151,7 @@
 	{%endif%}
   </tbody>
 </table>
+{% endif %}
 			<div> <br> <a href=""> <img src="https://img.icons8.com/doodle/48/000000/chat.png"/></a></div>
 
 			

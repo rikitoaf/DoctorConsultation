@@ -14,6 +14,8 @@ urlpatterns = [
 	path('logout/', views.logoutUser, name="logout"),
     path('about/', views.about, name="about"),
     
+    path('testreport/', views.model_form_upload, name="testreport"),
+    
     path('doctor/', include('hospitals.urls'))
 ]
 if settings.DEBUG:

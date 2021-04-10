@@ -28,6 +28,13 @@ def _post_save_receiver(sender,created,instance, **kwargs):
     
 
 
+
+
+class Document(models.Model):
+    user =  models.OneToOneField(User, on_delete=models.CASCADE)
+    description = models.CharField(max_length=255, blank=True)
+    document = models.FileField(upload_to='documents/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
 # class Department(models.Model):
 #     dept_name = models.CharField(max_length=200, null=True)
 

@@ -61,13 +61,14 @@
                   {% endif %}
 								</div>
               </div>
+              {% if request.user.doctor %}
 							<div class="col">
 								<div class="top-wrap d-flex">
 									<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-bell"></span></div>
 									<div class="text"><span>Appointment Schedule</span><span> no appointments yet</span></div>
 								</div>
 							</div>
-              
+              {% endif%}
 						</div>
 					</div>
 				</div>

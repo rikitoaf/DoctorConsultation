@@ -44,8 +44,28 @@ def doctor_edit (request):
 def dashboard(request):
 	
 	doc = Doctor.objects.get(user = request.user)
+
 	appointment = TakeAppointment.objects.filter(doctor = doc )
-	context = {'appointment' : appointment}
+	total = appointment.count()
+	visited = TakeAppointment.objects.filter(is_visited = True , doctor = doc)
+	visited = visited.count()
+	remaining = total - visited
+	context = {'appointment' : appointment, 'total' : total, 'remaining' : remaining, 'visited' : visited}
+
+	return render(request, 'hospitals/dashboard.html',context)
+
+def visiting(request,pk):
+	doc = Doctor.objects.get(user = request.user)
+	user = User.objects.get(username =pk)
+	appointment = TakeAppointment.objects.get(doctor = doc, user = user )
+	appointment.is_visited = True
+	appointment.save()
+	appointment = TakeAppointment.objects.filter(doctor = doc )
+	total = appointment.count()
+	visited = TakeAppointment.objects.filter(is_visited = True , doctor = doc)
+	visited = visited.count()
+	remaining = total - visited
+	context = {'appointment' : appointment, 'total' : total, 'remaining' : remaining, 'visited' : visited}
 
 	return render(request, 'hospitals/dashboard.html',context)
 
@@ -53,6 +73,8 @@ def dashboard(request):
 def doctor_view(request):
 	doctors=Doctor.objects.all()
 	context={'doctors':doctors}
+	for d in doctors:
+		print(d)
 
 	return render(request, 'hospitals/doctorView.html',context)
 

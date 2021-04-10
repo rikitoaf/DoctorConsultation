@@ -49,3 +49,5 @@ class TakeAppointment(models.Model):
     message = models.CharField( max_length=100)
     date = models.DateTimeField(default=timezone.now)
     is_visited = models.BooleanField(default = False)
+
+
