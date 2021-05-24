@@ -1,0 +1,175 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block profile %}active{% endblock %}
+{% block content %}
+
+
+
+{% load crispy_forms_tags %}
+
+<div class="container">
+<div class="row">
+	<div class="col-md-4 ftco-animate d-flex fadeInUp ftco-animated">
+		<div class="staff bg-primary">
+			<div class="img-wrap d-flex align-items-stretch">
+				<img class="img align-self-stretch" src="{{ u.profile.user_img.url }}">
+			</div>
+			<div class="text pt-3 px-3  text-center">
+				<h4>{{ u.username }} </h4>
+			</div>
+			{% if request.user.doctor %}
+				<div class="text-center">
+							<h4>adgfgfd</h4>
+							<h2 > </h2 >
+							<span class="position mb-2">{{u.doctor.institution}}</span>
+							<div class="faded">
+								<p>Quotes</p>
+				
+								<ul class="ftco-social text-center">
+			
+								</ul>
+							</div>
+				</div>
+			{% else %}
+			<div class="text-center">
+				<h4> {{u.profile.user_gender}}</h4>
+				{% comment %} <h3 > Address : {{u.profile.user_address}}</h3 > {% endcomment %}
+				<span class="position mb-2">Age :{{u.profile.user_age}}</span>
+				<div class="faded">
+					<h3> Phone : {{u.profile.user_phone}}</h3>
+
+					<ul class="ftco-social text-center">
+					</ul>
+				</div>
+			</div>
+			{%endif%}
+		</div>
+	</div>
+	<div class="col-md-4 ftco-animate  fadeInUp ftco-animated">
+		<div class="row">
+			<div class="class-md-12">
+			{% if request.user.doctor %}
+				<div class="text mt-3">
+					<h3 class="heading"><a href="#">Some Brief Advice/Suggestion </a></h3>
+					<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+					<!-- <p><a href="#" class="btn btn-primary">check dashboard</a></p> -->
+				</div>
+
+			{% endif %}
+			</div>
+		</div>
+		<div class="row">
+		
+			<div class="col-md-12">
+				<table class="table">
+					<thead>
+						<tr>
+						
+						<th scope="col">Doctor</th>
+						<th scope="col">Appointment Date</th>
+						<th scope="col">Starting Time</th>
+						</tr>
+					</thead>
+					<tbody>
+						{%for i in appointment%}
+							<tr>
+								<th scope="row">{{i.doctor.user}}</th>
+								<td>{{i.date}}</td>
+								<td>{{i.doctor.start_time}}</td>	
+							</tr>
+						{%endfor%}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+					
+<div class="col-md-4 ftco-animate d-flex fadeInUp ftco-animated">
+<div class="container">
+
+	{% if request.user.username == u.username %}	
+<p><a href="{%url 'profile_edit' %}" class="btn btn-primary">Edit Profile</a></p>
+<p> <a href="{%url 'doctoredit' %}" class="btn btn-primary">Edit Doctor Profile</a></p>
+{% else %}
+<p><a href="{%url 'appointment' u.username %}" class="btn btn-primary">Take Appointment</a></p>
+{% endif %}
+
+{% if request.user.doctor %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Time</th>
+      <th scope="col">Weekly Days</th>
+  
+    </tr>
+  </thead>
+  <tbody>
+  {% if u.doctor.week_sat%}
+    <tr>
+	
+      <th scope="row">{{u.doctor.start_time}} - {{u.doctor.end_time}}  </th>
+      <td>Satday</td>
+   
+    </tr>
+	{%endif%}
+	{% if u.doctor.week_sun%}
+    <tr>
+     <th scope="row">{{u.doctor.start_time}} - {{u.doctor.end_time}}  </th>
+      <td>Sunday</td>
+     
+    </tr>
+	{%endif%}
+   {% if u.doctor.week_mon%}
+    <tr>
+     <th scope="row">{{u.doctor.start_time}} - {{u.doctor.end_time}}  </th>
+      <td>Monday</td>
+     
+    </tr>
+	{%endif%}
+
+	{% if u.doctor.week_tues%}
+    <tr>
+     <th scope="row">{{u.doctor.start_time}} - {{u.doctor.end_time}}  </th>
+      <td>Tuesday</td>
+     
+    </tr>
+	{%endif%}
+
+	{% if u.doctor.week_wed%}
+    <tr>
+     <th scope="row">{{u.doctor.start_time}} - {{u.doctor.end_time}}  </th>
+      <td>Wednesday</td>
+     
+    </tr>
+	{%endif%}
+
+	{% if u.doctor.week_thurs%}
+    <tr>
+     <th scope="row">{{u.doctor.start_time}} - {{u.doctor.end_time}}  </th>
+      <td>Thursday</td>
+     
+    </tr>
+	{%endif%}
+
+	{% if u.doctor.week_fri%}
+    <tr>
+     <th scope="row">{{u.doctor.start_time}} - {{u.doctor.end_time}}  </th>
+      <td>Friday</td>
+     
+    </tr>
+	{%endif%}
+  </tbody>
+</table>
+{% endif %}
+	<div> <br> <a href="{%url 'testreport' %}"> <img src="https://img.icons8.com/doodle/48/000000/chat.png"/>Test Report</a></div>
+
+			
+	</div>
+	</div>
+
+	</div>
+
+</div>
+
+{% endblock content %}
+

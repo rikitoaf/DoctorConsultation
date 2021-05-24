@@ -1,0 +1,99 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block department %}active{% endblock %}
+{% block content %}
+<br>
+
+<div class="row">
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="total-Appointment">
+			  	<div class="card-header">
+			  		<h5 class="card-title">Total Appointment</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{{total}}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="todays-visited">
+			  	<div class="card-header">
+			  		<h5 class="card-title">Todays Visited</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{{visited}}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="appointment-pending">
+			  	<div class="card-header">
+			  		<h5 class="card-title">appointments Pending</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{{remaining}}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br>
+
+   
+       <div class="col-md-12">
+           <h5>Patients List:</h5>
+           <hr>
+           <div class="card card-body">
+               <a class="btn btn-primary  btn-sm btn-block" href="">Create Appointment</a>
+               <table class="table table-sm">
+                   <tr>
+                       <th>Name</th>
+                       <th>Date Appointed</th>
+                       <th>Status</th>
+                     
+                       
+                       <th>Report</th>
+                   </tr>
+                        {% for i in appointment%}       
+                   <tr>
+                        <td>
+                        {{i.user}}
+                        </td>
+                       <td>
+                       {{i.date}}
+                        </td>
+				{% if i.is_visited %}
+                         <td>
+                            <a class="btn btn-sm btn-info" href="">Visited</a>
+                        </td>
+                        {% else %}
+                        <td>
+                            <a class="btn btn-sm btn-danger" href="{% url 'visiting' i.user %}">Pending</a>
+                        </td>
+					{% endif %}
+
+
+
+                       
+                        <td>
+                           <a class="btn btn-sm btn-secondary"href="{{i.user.document.document.url}} ">Report</a>
+                           
+                        </td>
+                   </tr>
+                   {% endfor %}
+               </table>
+           </div>
+       </div>
+   
+   </div>
+
+
+
+{% endblock  %}
